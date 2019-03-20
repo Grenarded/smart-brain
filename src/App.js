@@ -7,6 +7,7 @@ import Register from './components/Register/Register';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import Footer from './components/Footer/Footer';
 import './App.css';
 
 const particlesOptions = {
@@ -57,11 +58,12 @@ class App extends Component {
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
+    console.log(clarifaiFace);
     return {
       leftCol: clarifaiFace.left_col * width,
       topRow: clarifaiFace.top_row * height,
       rightCol: width - (clarifaiFace.right_col * width),
-      bottomRow: height - (clarifaiFace.bottom_row * height)
+      bottomRow: height - (clarifaiFace.bottom_row * height) + 90
     }
   }
 
@@ -121,12 +123,13 @@ class App extends Component {
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
          {route === 'home' 
           ? <div>
-              <Logo />
+              <Logo/>
               <Rank name={this.state.user.name} entries={this.state.user.entries}/>
               <ImageLinkForm 
               onInputChange={this.onInputChange} 
               onButtonSubmit={this.onButtonSubmit}/>
               <FaceRecognition box={box} imageUrl={imageUrl}/>
+              <Footer/>
             </div>
           : (
             route === 'signin'

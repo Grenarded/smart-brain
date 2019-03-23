@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Particles from 'react-particles-js';
+import ParticlesBackground from './ParticlesBackground';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
@@ -9,18 +9,6 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Footer from './components/Footer/Footer';
 import './App.css';
-
-const particlesOptions = {
-  particles: {
-    number: {
-      value: 30,
-      density: {
-        enable: true,
-        value_area: 140
-      }
-    }
-  }
-}
 
 const initialState = {
     input: '',
@@ -74,7 +62,7 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
 
-  onButtonSubmit = () => {
+onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
       fetch('https://murmuring-spire-40328.herokuapp.com/imageurl', {
         method: 'post',
@@ -113,12 +101,11 @@ class App extends Component {
     this.setState({route: route});
   }
 
-  render() {
+render() {
     const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
-       <Particles className='particles' 
-                params={particlesOptions} />
+        <ParticlesBackground/>
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
          {route === 'home' 
           ? <div>
@@ -131,9 +118,9 @@ class App extends Component {
               <Footer/>
             </div>
           : (
-            route === 'signin'
-            ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-            : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+              route === 'signin'
+              ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+              : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
             )        
           }
         </div>

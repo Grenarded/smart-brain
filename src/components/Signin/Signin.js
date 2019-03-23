@@ -16,6 +16,7 @@ class Signin extends React.Component {
         this.setState({signInPassword: event.target.value})
     }
 
+
     onSubmitSignIn = () => {
         fetch('https://murmuring-spire-40328.herokuapp.com/signin', {
             method: 'post',
@@ -60,6 +61,7 @@ class Signin extends React.Component {
                                 name="password"  
                                 id="password" 
                                 onChange={this.onPasswordChange}
+                                onKeyPress={this.keyEnterPressed}
                                 />
                         </div>
                         </fieldset>
